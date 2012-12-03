@@ -1,4 +1,4 @@
-var makeDancer = function(left, top){
+window.makeDancer = function(left, top){
   var dancer = {
 
     htmlString: "<span class='dancer'></span>",
