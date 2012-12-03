@@ -1,33 +1,34 @@
 window.makeDancer = function(left, top){
   var dancer = {
-
-    htmlString: "<span class='dancer'></span>",
-    left: left,
     top: top,
-    period: Math.random() * 2000,
+    left: left,
+    frequency: Math.random() * 2000,
 
-    step: function(){
-      this.elem.toggle();
-    },
+    // get dressed...
+    moneyMaker: $("<span class='dancer'></span>"),
 
     dance: function(){
-      this._assembleHtml() //get dressed
-      this._setupSteps()   //...and do those sexy moves
+      // go out...
+      dancer.moneyMaker.appendTo(".stage");
+      // ...and do those sexy moves
+      setInterval(dancer.step, dancer.frequency);
     },
 
-    _assembleHtml: function(){
-      this.elem = $(this.htmlString);
-      this.elem.css("left", this.left);
-      this.elem.css("top", this.top);
-      $(".stage").append(this.elem);
+    step: function(){
+      dancer.getInPosition();
+      dancer.blink();
     },
 
-    _setupSteps: function(){
-      var that = this;
-      setInterval(function(){
-        that.step();
-      }, this.period);
+    getInPosition: function(){
+      dancer.moneyMaker.css({top: dancer.top, left: dancer.left});
+    },
+
+    blink: function(){
+      dancer.moneyMaker.toggle();
     }
+
   };
+  dancer.getInPosition();
+
   return dancer;
 };
