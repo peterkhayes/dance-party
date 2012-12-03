@@ -1,0 +1,17 @@
+body{
+  margin: 0px;
+  background-color:#444;
+  color: lightblue;
+  font-size: 18px;
+}
+.topbar span{
+  padding:5px;
+  float:right;
+}
+.topbar{
+  height:32px;
+  background-color: #555;
+}
+.title{
+  background-color: #777;
+}
