@@ -15,3 +15,8 @@ body{
 .title{
   background-color: #777;
 }
+.dancer{
+  border:10px solid red;
+  border-radius:10px;
+  position:absolute;
+}

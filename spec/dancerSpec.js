@@ -13,4 +13,12 @@ describe("dancer", function() {
   it("should have an html string", function() {
     expect(dancer.htmlString).toMatch(jasmine.any(String));
   });
+
+  it("should have a step function that toggles its elem", function() {
+    var mockElement = {toggle: function(){}};
+    dancer.elem = mockElement;
+    spyOn(mockElement, 'toggle');
+    dancer.step();
+    expect(mockElement.toggle).toHaveBeenCalled();
+  });
 });

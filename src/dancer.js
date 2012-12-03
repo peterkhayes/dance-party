@@ -1,10 +1,10 @@
 var makeDancer = function(left, top){
   var dancer = {
-    htmlString: "<div class='dancer'></div>",
+    htmlString: "<span class='dancer'></span>",
     left: left,
     top: top,
     step: function(){
-      // do stuff
+      this.elem.toggle();
     }
   };
   return dancer;
