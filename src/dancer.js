@@ -1,5 +1,6 @@
-var makeDancer = function(x, y, elem){
+var makeDancer = function(x, y){
   var dancer = {
+    htmlString: "<div class='dancer'></div>",
     x: x,
     y: y,
     step: function(){
@@ -7,4 +8,4 @@ var makeDancer = function(x, y, elem){
     }
   };
   return dancer;
-}
+};

@@ -9,4 +9,8 @@ describe("dancer", function() {
     expect(dancer.x).toBe(20);
     expect(dancer.y).toBe(10);
   });
+
+  it("should have an html string", function() {
+    expect(dancer.htmlString).toMatch(jasmine.any(String));
+  });
 });
