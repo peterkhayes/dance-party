@@ -20,15 +20,9 @@ describe("dancer", function() {
   });
 
   it("should have a step function that shakes its moneyMaker", function() {
-    var mockElement = {
-      toggle: function(){},
-      css: function(){}
-    };
-
-    dancer.moneyMaker = mockElement;
-    spyOn(mockElement, 'toggle');
+    spyOn(dancer.moneyMaker, 'toggle');
     dancer.step();
-    expect(mockElement.toggle).toHaveBeenCalled();
+    expect(dancer.moneyMaker.toggle).toHaveBeenCalled();
   });
 
   it("should have a dance function that is a pain to test", function() {
