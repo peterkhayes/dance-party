@@ -1,4 +1,4 @@
-window.makeDancer = function(left, top){
+window.kindsOfDancers["makeDancer"] = function(left, top){
   var dancer = {
     top: top,
     left: left,
