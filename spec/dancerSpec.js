@@ -36,6 +36,23 @@ describe("dancer", function() {
       expect($(".stage").html()).not.toEqual('');
     });
 
+    it("should call step periodically", function(){
+      // setup
+      jasmine.Clock.useMock();
+      spyOn(dancer, "step");
+      dancer.dance();
+
+      expect(dancer.step).not.toHaveBeenCalled();
+
+      jasmine.Clock.tick(dancer.frequency + 10);
+
+      expect(dancer.step).toHaveBeenCalled();
+
+      jasmine.Clock.tick(dancer.frequency + 10);
+
+      expect(dancer.step.callCount).toBe(2);
+    });
+
     afterEach(function(){
       $('.stage').remove();
     });
