@@ -11,6 +11,6 @@ $(document).ready(function(){
   // * When you're writing mixins that affect existing dancers, you'll use it.
   var dancers = [];
 
-  startDanceFloor(kindsOfDancers, dancers);
-
+  var danceFloor = makeDanceFloor(kindsOfDancers, dancers);
+  makeControls(danceFloor);
 });
