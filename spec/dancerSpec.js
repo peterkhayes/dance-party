@@ -25,7 +25,19 @@ describe("dancer", function() {
     expect(dancer.moneyMaker.toggle).toHaveBeenCalled();
   });
 
-  it("should have a dance function that is a pain to test", function() {
-    expect(dancer.dance).toEqual(jasmine.any(Function));
+  describe("dance", function(){
+    beforeEach(function(){
+      $('<div class="stage"></div>').appendTo('body');
+    });
+
+    it("should add something to the stage", function(){
+      var oldStageContents = $(".stage").html();
+      dancer.dance();
+      expect($(".stage").html()).not.toEqual(oldStageContents);
+    });
+
+    afterEach(function(){
+      $('.stage').remove();
+    });
   });
 });
