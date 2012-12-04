@@ -5,18 +5,19 @@ $(document).ready(function(){
 
   window.dancers = [];
 
-  var setupDancer = function(d){
+  var setupDancer = function(){
+    // figure out which dancer we're supposed to make
+    var dancerCreatorName = $(this).data("dancer-creator");
+    var dancerCreator = window[dancerCreatorName];
+
     // make a dancer with a random position
     var w = Math.random() * danceFloorWidth;
     var h = Math.random() * danceFloorHeight;
-    var d = makeDancer(w, h);
+    var d = dancerCreator(w, h);
+    
     d.dance();
     dancers.push(d);
   };
 
-  $(".clickable").on("click", function(){
-    var dancerCreator = $(this).data("dancer-creator");
-    var d = window[dancerCreator]();
-    setupDancer(d);
-  });
+  $(".clickable").on("click", setupDancer);
 });
