@@ -1,4 +1,4 @@
-var makeDancer = function(left, top){
+var makeBlinkyDancer = function(left, top){
   var dancer = {
     top: top,
     left: left,

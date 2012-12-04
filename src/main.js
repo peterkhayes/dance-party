@@ -3,7 +3,7 @@ $(document).ready(function(){
   // This is a list of the different kinds of dancers. Right now, 
   // there's just one, but eventually, you'll want to add more.
   var kindsOfDancers = {
-    makeDancer: makeDancer
+    makeBlinkyDancer: makeBlinkyDancer
   };
   
   // This is a list of all the dancers that have been created.
@@ -12,5 +12,5 @@ $(document).ready(function(){
   var dancers = [];
 
   var danceFloor = makeDanceFloor(kindsOfDancers, dancers);
-  makeControls(danceFloor);
+  setupControls(danceFloor);
 });
