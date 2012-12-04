@@ -31,9 +31,9 @@ describe("dancer", function() {
     });
 
     it("should add something to the stage", function(){
-      var oldStageContents = $(".stage").html();
+      expect($(".stage").html()).toEqual('');
       dancer.dance();
-      expect($(".stage").html()).not.toEqual(oldStageContents);
+      expect($(".stage").html()).not.toEqual('');
     });
 
     afterEach(function(){
