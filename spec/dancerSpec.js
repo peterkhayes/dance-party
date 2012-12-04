@@ -38,18 +38,16 @@ describe("dancer", function() {
 
     it("should call step periodically", function(){
       // setup
-      jasmine.Clock.useMock();
+      jasmine.Clock.useMock(); // sets up a way to delay this test -- used below
       spyOn(dancer, "step");
       dancer.dance();
 
-      expect(dancer.step).not.toHaveBeenCalled();
+      expect(dancer.step.callCount).toBe(0);
 
       jasmine.Clock.tick(dancer.frequency + 10);
-
-      expect(dancer.step).toHaveBeenCalled();
+      expect(dancer.step.callCount).toBe(1);
 
       jasmine.Clock.tick(dancer.frequency + 10);
-
       expect(dancer.step.callCount).toBe(2);
     });
 
