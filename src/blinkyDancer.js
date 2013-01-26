@@ -12,12 +12,12 @@ var makeBlinkyDancer = function(left, top){
     frequency: Math.random() * 2000,
 
     // get dressed... (use jQuery to create an HTML <span> tag)
-    moneyMaker: $("<span class='dancer'></span>"),
+    $moneyMaker: $('<span class="dancer"></span>'),
 
     dance: function(){
       // go out...  (add our tag to the HTML page)
-      dancer.moneyMaker.appendTo(".stage");
-      // ...and do those sexy moves 
+      dancer.$moneyMaker.appendTo('.stage');
+      // ...and do those sexy moves
       // (dancer.step will be called on a timer)
       setInterval(dancer.step, dancer.frequency);
     },
@@ -35,18 +35,18 @@ var makeBlinkyDancer = function(left, top){
         top: dancer.top,
         left: dancer.left
       };
-      dancer.moneyMaker.css(styleObj);
+      dancer.$moneyMaker.css(styleObj);
     },
 
     blink: function(){
-      dancer.moneyMaker.toggle();
       /* toggle() is a jQuery method to show/hide the <span> tag.
        * See http://api.jquery.com/category/effects/ for this and
        * other effects you can use on a jQuery-wrapped html tag. */
+      dancer.$moneyMaker.toggle();
     }
 
   }; // end dancer
-  
+
   dancer.getInPosition();
 
   return dancer;

@@ -28,12 +28,12 @@ describe("danceFloor", function() {
   describe("makeDancer", function(){
 
     it("should make a dancer of the specified type", function(){
-      danceFloor.makeDancer("makeFakeDancer");
+      danceFloor.addDancer("makeFakeDancer");
       expect(makeFakeDancer).toHaveBeenCalled();
     });
 
     it("should call 'dance' on the created dancer", function(){
-      danceFloor.makeDancer("makeFakeDancer");
+      danceFloor.addDancer("makeFakeDancer");
       expect(fakeDancer.dance).toHaveBeenCalled();
     });
 
