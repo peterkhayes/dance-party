@@ -1,21 +1,29 @@
 $(document).ready(function(){
+  $(".addDancerButton").on("click", function(event){
+    /* This function sets up the click handlers for the create-dancer
+     * buttons on index.html. You should not need to alter it.
+     * As long as the "data-dancer-maker-function-name" attribute of a
+     * class="addDancerButton" DOM node matches one of the names of the
+     * maker functions available in the global scope, clicking that node
+     * will call the function to make the dancer. */
 
-  /* This is a list of the different kinds of dancers. Right now,
-   * there's just one, but as you create more types, you'll need
-   * to add their factory functions here. */
-  var kindsOfDancers = {
-    makeBlinkyDancer: makeBlinkyDancer // found in blinkyDancer.js
-  };
+    /* dancerMakerFunctionName is a string which must match
+     * one of the dancer maker functions available in global scope.
+     * A new object of the given type will be created and added
+     * to the stage.
+     */
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
 
-  /* This is a list of all the dancers that have been created.
-   * danceFloor.js will create new dancers and add them to the list.*/
-  window.dancers = [];
+    // get the maker function for the kind of dancer we're supposed to make
+    var dancerMakerFunction = window[dancerMakerFunctionName];
 
-  /* "window" is a global object that is always defined for javascript
-   * running in a web page. So setting a property of window is a trick
-   * to make a global variable. You can refer to window.dancers
-   * anywhere in order to check what dancers currently exist.*/
+    // make a dancer with a random position
+    var dancer = dancerMakerFunction(
+      $("body").height() * Math.random(),
+      $("body").width() * Math.random(),
+      Math.random() * 2000
+    );
 
-  var danceFloor = makeDanceFloor(kindsOfDancers, dancers);
-  setupControls(danceFloor);
+    $('body').append(dancer.$node);
+  });
 });
