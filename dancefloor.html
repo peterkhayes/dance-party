@@ -5,11 +5,16 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="lib/jquery.js"></script>
     <script src="lib/underscore.js"></script>
+    <script src="src/helperFUnctions.js"></script>
     <script src="src/dancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
     <script src="src/slinkyDancer.js"></script>
     <script src="src/twinkyDancer.js"></script>
     <script src="src/dinkyDancer.js"></script>
+    <script src="src/discoLight.js"></script>
+    <script language="javascript" type="text/javascript">
+
+     </script>
   </head>
   <body>
 
@@ -28,7 +33,9 @@
 
     <script>
       $(document).ready(function(){
+
         window.dancers = [];
+        window.lights = [];
 
         var addDancer = function(dancerMakerFunctionName) {
           // get the maker function for the kind of dancer we're supposed to make
@@ -47,9 +54,21 @@
           $('body').append(dancer.$node);
         };
 
+        playSound("src/sound/electricfeel.mp3");
+
         $('.feverButton').on("click", function() {
+          playSound("src/sound/recordscratch.mp3");
           $(".greyOut").animate({opacity:0.7}, 2000, "swing", function() {
-            $('.discoBall').animate({top:150}, 3000, "swing");
+            playSound("src/sound/machine.mp3");
+            $('.discoBall').animate({top:150}, 3000, "swing", function() {
+              debugger;
+              for (var i = 0; i < 10; i++) {
+                var light = new DiscoLight(1, i/10);
+                window.lights.push(light);
+                $('body').append(light.$node);
+              }
+              playSound("src/sound/stayinalive.mp3");
+            });
           });
         });
 
@@ -111,7 +130,8 @@
       });
     </script>
     <div class="discoBall pole"></div>
-    <img class ="discoBall ball" src="src/discoball.gif"/> 
+    <img class ="discoBall ball" src="src/img/discoball.gif"/> 
     <div class="greyOut"></div>
+    <span id="soundPlayer"></span>
   </body>
 </html>

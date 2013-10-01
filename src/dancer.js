@@ -1,5 +1,5 @@
 function Dancer(top, left, timeBetweenSteps, number) {
-  this.$node = $('<img src="src/guy.png" class="dancer"/>');
+  this.$node = $('<img src="src/img/guy.png" class="dancer"/>');
   this.timeBetweenSteps = timeBetweenSteps;
   this.behavior = "default";
   this.step();
@@ -105,15 +105,6 @@ Dancer.prototype.battle = function() {
   }
 
   this.moveTo(new_y, new_x);
-};
-
-var calcDistance = function(x1, y1, x2, y2) {
-  return Math.sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2));
-};
-
-var generateAngle = function(period) { // Period provided in seconds.
-  period = period * 1000;
-  return ((new Date()) % period) * 2 * Math.PI/(period);
 };
 
 

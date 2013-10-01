@@ -18,7 +18,6 @@ TwinkyDancer.prototype.height = function () {
 
 TwinkyDancer.prototype.defaultStep = function() {
   //Dancer.prototype.step.apply(this, arguments);
-  debugger;
   this.$node.animate({
     'height': this.height() + (this.gFactor)*(this.growing ? 1 : -1),
     'top': parseInt(this.$node.css("top"),10) - (this.gFactor)*(this.growing ? 1 : -1),
