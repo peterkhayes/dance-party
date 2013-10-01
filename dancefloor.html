@@ -62,8 +62,8 @@
             playSound("src/sound/machine.mp3");
             $('.discoBall').animate({top:150}, 3000, "swing", function() {
               debugger;
-              for (var i = 0; i < 10; i++) {
-                var light = new DiscoLight(1, i/10);
+              for (var i = 0; i < 40; i++) {
+                var light = new DiscoLight(Math.floor(i/10)+1, (i % 10)/10 + (Math.floor(i/10) % 2)/20);
                 window.lights.push(light);
                 $('body').append(light.$node);
               }
