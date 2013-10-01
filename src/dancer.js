@@ -64,10 +64,11 @@ Dancer.prototype.conga = function() {
   // Leader.
   if (this.partner === null) {
     var angle = generateAngle(20);
-    var radius = $('body').height() / 2.3;
+    var radius = Math.cos(angle)*Math.cos(angle)*$('body').width()/2.3;
 
     var x = radius*Math.cos(angle) + $('body').width()/2 + Math.random()*$('body').width()/30;
-    var y = (-1)*radius*Math.sin(angle) + $('body').height()/2 + Math.random()*$('body').height()/20;
+    var y = (radius*Math.cos(angle) < 0 ? 1 : -1)*radius*Math.sin(angle) + $('body').height()/2 + Math.random()*$('body').height()/20;
+
 
     this.moveTo(y, x);
   // Follower.
