@@ -19,7 +19,7 @@
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="SlinkyDancer">SLINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="TwinkyDancer">TWINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="DinkyDancer">DINKY</a>
-      <a href="#" class="behaviorButton" data-behavior-name="default">AT EASE</a>
+      <a href="#" class="behaviorButton" data-behavior-name="default">FREESTYLE</a>
       <a href="#" class="behaviorButton" data-behavior-name="lineUp">LINE UP</a>
     </div>
 
@@ -41,8 +41,15 @@
 
           window.dancers.push(dancer);
 
-          $('body').append(dancer.$node);    
-        }
+          $('body').append(dancer.$node); 
+          dancer.$node.on('click', function(event) {
+            alertPosition(this, dancer.number);
+          });
+        };
+
+        var alertPosition = function(elem, extra) {
+          alert('x:' + $(elem).css("left") + ', y:' + $(elem).css("top") + ", num:"  + extra);
+        };
 
         $(".title").on("click", function(event) {
           for (var i = 0; i < 20; i++) {

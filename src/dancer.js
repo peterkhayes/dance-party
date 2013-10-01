@@ -39,8 +39,9 @@ Dancer.prototype.lineUp = function() {
   this.$node.show();
   var height = $('body').height();
   var targety = 40 + (24*this.number) % (Math.floor((height - 40)/24)*24);
-  var targetx = 50 + 24*Math.floor((40+24*this.number)/(Math.floor((height - 40)/24)*24)-1);
-  if (parseInt(this.$node.css("top"),10) !== targety) {
+  var targetx = 50 + 24*Math.floor((40+24*(this.number-1))/(Math.floor((height - 40)/24)*24));
+  // We check if they're positioned in line so they don't queue up a lot of animations.
+  if (parseInt(this.$node.css("top"),10) !== targety || parseInt(this.$node.css("left"),10) !== targetx) {
     this.moveTo(targety,targetx, "slow");
   }
 };
