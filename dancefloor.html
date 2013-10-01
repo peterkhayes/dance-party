@@ -35,20 +35,13 @@
           var dancer = new dancerMakerFunction(
             ($("body").height() * 8 / 10)* Math.random() + ($("body").height() * 1 / 10),
             $("body").width() * Math.random(),
-            Math.random() * 800 + 200,
+            Math.random() * 700 + 300,
             dancers.length // Dancer number is its position in the array.
           );
 
           window.dancers.push(dancer);
 
           $('body').append(dancer.$node); 
-          dancer.$node.on('click', function(event) {
-            alertPosition(this, dancer.number);
-          });
-        };
-
-        var alertPosition = function(elem, extra) {
-          alert('x:' + $(elem).css("left") + ', y:' + $(elem).css("top") + ", num:"  + extra);
         };
 
         $(".title").on("click", function(event) {
