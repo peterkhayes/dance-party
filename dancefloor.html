@@ -21,6 +21,8 @@
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="DinkyDancer">DINKY</a>
       <a href="#" class="behaviorButton" data-behavior-name="default">FREESTYLE</a>
       <a href="#" class="behaviorButton" data-behavior-name="lineUp">LINE UP</a>
+      <a href="#" class="behaviorButton" data-behavior-name="conga">CONGA</a>
+      <a href="#" class="behaviorButton" data-behavior-name="battle">BATTLE</a>
     </div>
 
     <script>
@@ -35,7 +37,7 @@
           var dancer = new dancerMakerFunction(
             ($("body").height() * 8 / 10)* Math.random() + ($("body").height() * 1 / 10),
             $("body").width() * Math.random(),
-            Math.random() * 700 + 300,
+            Math.random() * 650 + 350,
             dancers.length // Dancer number is its position in the array.
           );
 
@@ -45,7 +47,7 @@
         };
 
         $(".title").on("click", function(event) {
-          for (var i = 0; i < 20; i++) {
+          for (var i = 0; i < 16; i++) {
             addDancer("SlinkyDancer");
             addDancer("DinkyDancer");
             addDancer("BlinkyDancer");
@@ -54,9 +56,33 @@
 
         $(".behaviorButton").on("click", function(event) {
           var behavior = $(this).data("behavior-name");
-          _(window.dancers).each(function (dancer) {
+          _(window.dancers).each(function (dancer, index) {
             dancer.behavior = behavior;
+
+            // Paring:
+            // For dances that require a big snake-line.
+            if (behavior === "conga") {
+              if (dancers[index + 1]) {
+                dancers[index + 1].partner = dancer
+              }
+            // For dances that require partnering off.
+            } else if (behavior === "battle") {
+              if (index % 2 === 1) {
+                dancer.partner = dancers[index - 1];
+                dancers[index-1].partner = dancer;
+              }
+
+              // Remember that the last dancer in an odd-sized list is unpaired.
+              if (index === dancers.length - 1 && index % 2 === 0) {
+                dancer.partner = null;
+                dancer.behavior = "default"
+              }
+            // For dances with no partner assignment.
+            } else {
+              dancer.partner = null;
+            }
           });
+
         });
 
         $(".addDancerButton").on("click", function(event){
