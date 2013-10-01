@@ -19,6 +19,7 @@
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="SlinkyDancer">SLINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="TwinkyDancer">TWINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="DinkyDancer">DINKY</a>
+      <span href="#" class="feverButton">DA FEVER</span>
       <a href="#" class="behaviorButton" data-behavior-name="default">FREESTYLE</a>
       <a href="#" class="behaviorButton" data-behavior-name="lineUp">LINE UP</a>
       <a href="#" class="behaviorButton" data-behavior-name="conga">CONGA</a>
@@ -45,6 +46,12 @@
 
           $('body').append(dancer.$node);
         };
+
+        $('.feverButton').on("click", function() {
+          $(".greyOut").animate({opacity:0.7}, 2000, "swing", function() {
+            $('.discoBall').animate({top:150}, 3000, "swing");
+          });
+        });
 
         $(".title").on("click", function(event) {
           for (var i = 0; i < 12; i++) {
@@ -103,6 +110,8 @@
         });
       });
     </script>
-
+    <div class="discoBall pole"></div>
+    <img class ="discoBall ball" src="src/discoball.gif"/> 
+    <div class="greyOut"></div>
   </body>
 </html>

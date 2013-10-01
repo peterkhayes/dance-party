@@ -4,23 +4,28 @@ body, html{
 body{
   margin: 0;
   background-image: url('src/bgtile.png');
-  font-size: 18px;
+  font-size: 14px;
 }
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
 .title, .addDancerButton{
-  padding:5px 12px;
+  padding:5px 8px;
   float:right;
 }
 
-.behaviorButton {
-  padding: 5px 12px;
+.behaviorButton, .feverButton{
+  padding: 5px 8px;
   float:left;
 }
 
+.feverButton {
+  color: #FF9999;
+  cursor: pointer;
+}
+
 .topbar{
-  height:32px;
+  height:30px;
   background-color: #555;
 }
 .title{
@@ -41,4 +46,38 @@ body, a:link, a:visited, a:active{
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
+}
+
+.discoBall {
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: -200px;
+}
+
+.pole {
+  margin-top:-200px;
+  z-index: 1;
+  height:200px;
+  width:6px;
+  margin-left: -3px;
+  background-color: #444444;
+}
+
+.ball {
+  z-index: 2;
+  width:100px;
+  height:auto;
+  margin-left: -50px;
+}
+
+.greyOut {
+  opacity: 0;
+  background-color: #000000;
+  position:absolute;
+  margin:0;
+  width:105%;
+  height:1000px;
+  top:30px;
+  left:0;
 }
