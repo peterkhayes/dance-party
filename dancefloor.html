@@ -43,14 +43,15 @@
 
           window.dancers.push(dancer);
 
-          $('body').append(dancer.$node); 
+          $('body').append(dancer.$node);
         };
 
         $(".title").on("click", function(event) {
-          for (var i = 0; i < 16; i++) {
+          for (var i = 0; i < 12; i++) {
             addDancer("SlinkyDancer");
             addDancer("DinkyDancer");
             addDancer("BlinkyDancer");
+            addDancer("TwinkyDancer");
           }
         });
 
