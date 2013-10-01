@@ -30,7 +30,7 @@ body, a:link, a:visited, a:active{
 .dancer{
   position:absolute;
   height: 20px;
-  width: 20px;
+  width: auto;
   display:block;
 }
 
