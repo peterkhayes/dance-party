@@ -16,12 +16,11 @@ TwinkyDancer.prototype.height = function () {
   return parseInt(this.$node.css("height"), 10);
 };
 
-TwinkyDancer.prototype.step = function() {
-  Dancer.prototype.step.apply(this, arguments);
+TwinkyDancer.prototype.defaultStep = function() {
+  //Dancer.prototype.step.apply(this, arguments);
 
   if (this.horizontal) {
-    this.$node.css("width", this.width() + (this.gFactor)*(this.growing ? 1 : -1));
-    this.$node.css("left", parseInt(this.$node.css("left"),10) - (this.gFactor/2)*(this.growing ? 1 : -1));
+    this.$node.animate({"width": this.width() + (this.gFactor)*(this.growing ? 1 : -1), "left": parseInt(this.$node.css("left"),10) - (this.gFactor/2)*(this.growing ? 1 : -1)}, "fast");
 
     if (this.width() > this.maxSize) {
       this.growing = false;
@@ -36,8 +35,7 @@ TwinkyDancer.prototype.step = function() {
     }
 
   } else {
-    this.$node.css("height", this.height() + (this.gFactor)*(this.growing ? 1 : -1));
-    this.$node.css("top", parseInt(this.$node.css("top"),10) - (this.gFactor/2)*(this.growing ? 1 : -1));
+    this.$node.animate({"height": this.height() + (this.gFactor)*(this.growing ? 1 : -1), "top": parseInt(this.$node.css("top"),10) - (this.gFactor/2)*(this.growing ? 1 : -1)}, "fast");
 
     if (this.height() > this.maxSize) {
       this.growing = false;

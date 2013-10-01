@@ -4,23 +4,60 @@
     <title>Object Dance Party</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="lib/jquery.js"></script>
+    <script src="lib/underscore.js"></script>
     <script src="src/dancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
     <script src="src/slinkyDancer.js"></script>
-    <script src="src/TwinkyDancer.js"></script>    
+    <script src="src/twinkyDancer.js"></script>
+    <script src="src/dinkyDancer.js"></script>
   </head>
   <body>
 
     <div class="topbar">
-      <span class="title">object dance party</span>
+      <a href="#" class="title">object dance party</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="BlinkyDancer">BLINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="SlinkyDancer">SLINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="TwinkyDancer">TWINKY</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="DinkyDancer">DINKY</a>
+      <a href="#" class="behaviorButton" data-behavior-name="default">AT EASE</a>
+      <a href="#" class="behaviorButton" data-behavior-name="lineUp">LINE UP</a>
     </div>
 
     <script>
       $(document).ready(function(){
         window.dancers = [];
+
+        var addDancer = function(dancerMakerFunctionName) {
+          // get the maker function for the kind of dancer we're supposed to make
+          var dancerMakerFunction = window[dancerMakerFunctionName];
+
+          // make a dancer with a random position
+          var dancer = new dancerMakerFunction(
+            ($("body").height() * 8 / 10)* Math.random() + ($("body").height() * 1 / 10),
+            $("body").width() * Math.random(),
+            Math.random() * 800 + 200,
+            dancers.length // Dancer number is its position in the array.
+          );
+
+          window.dancers.push(dancer);
+
+          $('body').append(dancer.$node);    
+        }
+
+        $(".title").on("click", function(event) {
+          for (var i = 0; i < 20; i++) {
+            addDancer("SlinkyDancer");
+            addDancer("DinkyDancer");
+            addDancer("BlinkyDancer");
+          }
+        });
+
+        $(".behaviorButton").on("click", function(event) {
+          var behavior = $(this).data("behavior-name");
+          _(window.dancers).each(function (dancer) {
+            dancer.behavior = behavior;
+          });
+        });
 
         $(".addDancerButton").on("click", function(event){
           /* This function sets up the click handlers for the create-dancer
@@ -35,19 +72,7 @@
            * A new object of the given type will be created and added
            * to the stage.
            */
-          var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-
-          // get the maker function for the kind of dancer we're supposed to make
-          var dancerMakerFunction = window[dancerMakerFunctionName];
-
-          // make a dancer with a random position
-          var dancer = new dancerMakerFunction(
-            ($("body").height() * 8 / 10)* Math.random() + ($("body").height() * 1 / 10),
-            $("body").width() * Math.random(),
-            Math.random() * 1000
-          );
-
-          $('body').append(dancer.$node);
+          addDancer($(this).data("dancer-maker-function-name"));
         });
       });
     </script>

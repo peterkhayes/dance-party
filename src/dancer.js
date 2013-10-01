@@ -1,46 +1,19 @@
-// Creates and returns a new dancer object that can step
-/*
-var makeDancer = function(top, left, timeBetweenSteps){
-
-  var dancer = {};
-
-  // use jQuery to create an HTML <span> tag
-  dancer.$node = $('<span class="dancer"></span>');
-
-  dancer.step = function(){
-    // the basic dancer doesn't do anything interesting at all on each step,
-    // it just schedules the next step
-    setTimeout(dancer.step, timeBetweenSteps);
-  };
-  dancer.step();
-
-  dancer.setPosition = function(top, left){
-    //Use css top and left properties to position our <span> tag
-    //where it belongs on the page. See http://api.jquery.com/css/
-    //
-    var styleSettings = {
-      top: top,
-      left: left
-    };
-    dancer.$node.css(styleSettings);
-  };
-
-  // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
-  // this one sets the position to some random default point within the body
-  dancer.setPosition(top, left);
-
-  return dancer;
-};
-*/
-
-function Dancer(top, left, timeBetweenSteps) {
+function Dancer(top, left, timeBetweenSteps, number) {
   this.$node = $('<span class="dancer"></span>');
   this.timeBetweenSteps = timeBetweenSteps;
+  this.behavior = "default";
   this.step();
   this.setPosition(top, left);
+  this.number = number;
 }
 
 Dancer.prototype.step = function() {
+  
+  if (this.behavior === "default") {
+    this.defaultStep();
+  } else {
+    this[this.behavior]();
+  }
   // Bind like a boss; otherwise when setTimeout calls step, window will be the "this".
   setTimeout(this.step.bind(this), this.timeBetweenSteps);
 };
@@ -51,6 +24,25 @@ Dancer.prototype.setPosition = function (top, left) {
     left: left
   };
   this.$node.css(styleSettings);
+};
+
+Dancer.prototype.moveTo = function (top, left, speed) {
+  speed = speed || 200;
+  var styleSettings = {
+    top: top,
+    left: left
+  };
+  this.$node.animate(styleSettings, speed);
+};
+
+Dancer.prototype.lineUp = function() {
+  this.$node.show();
+  var height = $('body').height();
+  var targety = 40 + (24*this.number) % (Math.floor((height - 40)/24)*24);
+  var targetx = 50 + 24*Math.floor((40+24*this.number)/(Math.floor((height - 40)/24)*24)-1);
+  if (parseInt(this.$node.css("top"),10) !== targety) {
+    this.moveTo(targety,targetx, "slow");
+  }
 };
 
 

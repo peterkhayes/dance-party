@@ -5,8 +5,8 @@ function BlinkyDancer(top, left, timeBetweenSteps) {
 BlinkyDancer.prototype = Object.create(Dancer.prototype);
 BlinkyDancer.prototype.constructor = BlinkyDancer;
 
-BlinkyDancer.prototype.step = function() {
-  Dancer.prototype.step.apply(this, arguments);
+BlinkyDancer.prototype.defaultStep = function() {
+  //Dancer.prototype.step.apply(this, arguments);
   this.$node.toggle();
 };
 

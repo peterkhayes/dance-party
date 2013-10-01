@@ -8,8 +8,8 @@ function SlinkyDancer(top, left, timeBetweenSteps) {
 SlinkyDancer.prototype = Object.create(Dancer.prototype);
 SlinkyDancer.prototype.constructor = SlinkyDancer;
 
-SlinkyDancer.prototype.step = function() {
-  Dancer.prototype.step.apply(this, arguments);
+SlinkyDancer.prototype.defaultStep = function() {
+  //Dancer.prototype.step.apply(this, arguments);
 
   var newPos;
   if (this.horizontal) {
@@ -22,7 +22,7 @@ SlinkyDancer.prototype.step = function() {
     }
 
     newPos = left + Math.random()*this.maxStepSize*(this.forward ? 1 : - 1);
-    this.$node.css("left", newPos);
+    this.$node.animate({"left":newPos});
   } else {
     var top = parseInt(this.$node.css("top"), 10);
 
@@ -33,7 +33,7 @@ SlinkyDancer.prototype.step = function() {
     }
 
     newPos = top + Math.random()*this.maxStepSize*(this.forward ? 1 : - 1);
-    this.$node.css("top", newPos);
+    this.$node.animate({"top": newPos});
   }
 };
 
