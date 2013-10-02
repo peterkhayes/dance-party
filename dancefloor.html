@@ -12,9 +12,6 @@
     <script src="src/twinkyDancer.js"></script>
     <script src="src/dinkyDancer.js"></script>
     <script src="src/discoLight.js"></script>
-    <script language="javascript" type="text/javascript">
-
-     </script>
   </head>
   <body>
 
@@ -105,15 +102,22 @@
 
         $(".behaviorButton").on("click", function(event) {
           var behavior = $(this).data("behavior-name");
+          var unassignedDancers = window.dancers.slice(1);
+
           _(window.dancers).each(function (dancer, index) {
             dancer.behavior = behavior;
 
             // Paring:
             // For dances that require a big snake-line.
             if (behavior === "conga") {
+              // if (unassignedDancers.length) {
+              //   var closestIndex = findNearestPartner(unassignedDancers, index);
+              //   dancers[closestIndex].partner = dancer;
+              // }
               if (dancers[index + 1]) {
-                dancers[index + 1].partner = dancer
+                dancers[index + 1].partner = dancer;
               }
+
             // For dances that require partnering off.
             } else if (behavior === "battle") {
               if (index % 2 === 1) {

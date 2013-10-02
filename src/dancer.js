@@ -62,26 +62,33 @@ Dancer.prototype.lineUp = function() {
 Dancer.prototype.conga = function() {
   this.$node.show();
   // Leader.
+  var x, y;
   if (this.partner === null) {
     var angle = generateAngle(20);
     var radius = Math.cos(angle)*Math.cos(angle)*$('body').width()/2.3;
 
-    var x = radius*Math.cos(angle) + $('body').width()/2 + Math.random()*$('body').width()/30;
-    var y = (radius*Math.cos(angle) < 0 ? 1 : -1)*radius*Math.sin(angle) + $('body').height()/2 + Math.random()*$('body').height()/20;
+    x = radius*Math.cos(angle) + $('body').width()/2 + Math.random()*$('body').width()/30;
+    y = (radius*Math.cos(angle) < 0 ? 1 : -1)*radius*Math.sin(angle) + $('body').height()/2 + Math.random()*$('body').height()/20;
 
     if (calcDistance(this.x_pos(), this.y_pos(), x, y) > 100) {
       x = this.x_pos() + (x-this.x_pos())/3;
       y = this.y_pos() + (y-this.y_pos())/3;
     }
 
-    this.moveTo(y, x);
+    this.moveTo(y, x, 280);
   // Follower.
   } else {
-    var partnerX = this.partner.x_pos();
-    var partnerY = this.partner.y_pos();
+    x = this.partner.x_pos();
+    y = this.partner.y_pos();
 
-    if (parseInt(this.$node.css("top"),10) !== partnerY || parseInt(this.$node.css("left"),10) !== partnerX) {
-      this.moveTo(partnerY, partnerX, 280);
+    var distance = calcDistance(this.x_pos(), this.y_pos(), x, y);
+    if (distance > 200) {
+      x = this.x_pos() + 60*(x-this.x_pos())/distance;
+      y = this.y_pos() + 60*(y-this.y_pos())/distance;
+    }
+
+    if (parseInt(this.$node.css("top"),10) !== y || parseInt(this.$node.css("left"),10) !== x) {
+      this.moveTo(y, x, 280);
     }
   }
 };
@@ -93,10 +100,12 @@ Dancer.prototype.battle = function() {
   var y_mid = (this.y_pos() + this.partner.y_pos())/2;
   var new_x, new_y;
 
-  if (calcDistance(this.x_pos(), this.y_pos(), this.partner.x_pos(), this.partner.y_pos()) > 30) {
 
-    new_x = this.x_pos() + (x_mid - this.x_pos())/2;
-    new_y = this.y_pos() + (y_mid - this.y_pos())/2;
+  var distance = calcDistance(this.x_pos(), this.y_pos(), this.partner.x_pos(), this.partner.y_pos());
+  if (distance > 30) {
+
+    new_x = this.x_pos() + 60*(x_mid - this.x_pos())/distance;
+    new_y = this.y_pos() + 60*(y_mid - this.y_pos())/distance;
 
   } else {
 

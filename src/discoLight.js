@@ -16,9 +16,9 @@ function DiscoLight(layer, phase) { // Phase is between 0 and 1, layer is a natu
 }
 
 DiscoLight.prototype.step = function() {
-  this.moveTo(this.targetPos()[0], this.targetPos()[1],300);
+  this.$node.animate({top: this.targetPos()[0], left:this.targetPos()[1]}, 200);
 
-  setTimeout(this.step.bind(this), 300);
+  setTimeout(this.step.bind(this), 200);
 };
 
 DiscoLight.prototype.colors = ["#FFCCCC", "#CCFFCC", "#CCCCFF", "FFFFCC", "FFCCFF", "CCFFFF"];
