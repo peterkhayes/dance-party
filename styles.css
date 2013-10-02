@@ -14,12 +14,12 @@ body, a:link, a:visited, a:active{
   float:right;
 }
 
-.behaviorButton, .feverButton{
+.behaviorButton, .feverButton, .noFeverButton{
   padding: 5px 8px;
   float:left;
 }
 
-.feverButton {
+.feverButton, .noFeverButton {
   color: #FF9999;
   cursor: pointer;
 }

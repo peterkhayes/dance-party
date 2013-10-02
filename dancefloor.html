@@ -24,7 +24,7 @@
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="SlinkyDancer">SLINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="TwinkyDancer">TWINKY</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="DinkyDancer">DINKY</a>
-      <span href="#" class="feverButton">DA FEVER</span>
+      <span href="#" class="feverButton">DAT FEVER</span>
       <a href="#" class="behaviorButton" data-behavior-name="default">FREESTYLE</a>
       <a href="#" class="behaviorButton" data-behavior-name="lineUp">LINE UP</a>
       <a href="#" class="behaviorButton" data-behavior-name="conga">CONGA</a>
@@ -56,20 +56,42 @@
 
         playSound("src/sound/electricfeel.mp3");
 
-        $('.feverButton').on("click", function() {
+        $(document).on('click', '.feverButton', function() {
           playSound("src/sound/recordscratch.mp3");
-          $(".greyOut").animate({opacity:0.7}, 2000, "swing", function() {
-            playSound("src/sound/machine.mp3");
-            $('.discoBall').animate({top:150}, 3000, "swing", function() {
-              debugger;
-              for (var i = 0; i < 40; i++) {
-                var light = new DiscoLight(Math.floor(i/10)+1, (i % 10)/10 + (Math.floor(i/10) % 2)/20);
-                window.lights.push(light);
-                $('body').append(light.$node);
-              }
-              playSound("src/sound/stayinalive.mp3");
+            $(".greyOut").animate({opacity:0.7}, 2000, "swing", function() {
+              playSound("src/sound/machine.mp3");
+              $('.pole').animate({top:150}, 3000);
+              $('.ball').animate({top:150}, 3000, "swing", function() {
+                for (var i = 0; i < 40; i++) {
+                  var light = new DiscoLight(Math.floor(i/10)+1, (i % 10)/10 + (Math.floor(i/10) % 2)/20);
+                  window.lights.push(light);
+                  $('body').append(light.$node);
+                  console.log(window.lights);
+                }
+                playSound("src/sound/stayinalive.mp3");
+              });
+            });
+          var button = $('.feverButton');  
+          button.removeClass();
+          button.addClass('noFeverButton')
+          button.text("TOO MUCH FEVER");
+        });
+
+        $(document).on('click', '.noFeverButton', function () {
+          while (window.lights.length) {
+            (window.lights.pop().$node.remove());
+          }
+          playSound("src/sound/machine.mp3");
+          $('.pole').animate({top:-200}, 3000);
+          $('.ball').animate({top:-200}, 3000, "swing", function() {
+            $('.greyOut').animate({opacity:0}, 2000, "swing", function() {
+              playSound("src/sound/electricfeel.mp3");
             });
           });
+          var button = $('.noFeverButton');  
+          button.removeClass();
+          button.addClass('feverButton')
+          button.text("DAT FEVER");
         });
 
         $(".title").on("click", function(event) {

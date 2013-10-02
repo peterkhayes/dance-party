@@ -4,7 +4,7 @@ var calcDistance = function(x1, y1, x2, y2) {
 
 var generateAngle = function(period) { // Period provided in seconds.
   period = period * 1000;
-  return ((new Date()) % period) * 2 * Math.PI/(period);
+  return (-1)*((new Date()) % period) * 2 * Math.PI/(period);
 };
 
 var playSound = function(soundfile) {

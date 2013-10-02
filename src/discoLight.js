@@ -6,9 +6,9 @@ function DiscoLight(layer, phase) { // Phase is between 0 and 1, layer is a natu
   // Adjust css from passed variables, and give a random color.
   this.$node.css({
     "border-color": this.colors[Math.floor(Math.random()*this.colors.length)],
-    "border-radius": 5*this.layer,
-    "border-width": 5*this.layer,
-    "opacity": 0.5 - this.layer/10
+    "border-radius": 6*this.layer,
+    "border-width": 6*this.layer,
+    "opacity": 0.4 - this.layer/15
   });
 
   this.setPosition(this.targetPos()[0], this.targetPos()[1]);

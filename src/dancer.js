@@ -45,7 +45,7 @@ Dancer.prototype.moveTo = function (top, left, speed) {
     top: top,
     left: left
   };
-  this.$node.animate(styleSettings, speed);
+  this.$node.animate(styleSettings, speed, "linear");
 };
 
 Dancer.prototype.lineUp = function() {
@@ -69,6 +69,10 @@ Dancer.prototype.conga = function() {
     var x = radius*Math.cos(angle) + $('body').width()/2 + Math.random()*$('body').width()/30;
     var y = (radius*Math.cos(angle) < 0 ? 1 : -1)*radius*Math.sin(angle) + $('body').height()/2 + Math.random()*$('body').height()/20;
 
+    if (calcDistance(this.x_pos(), this.y_pos(), x, y) > 100) {
+      x = this.x_pos() + (x-this.x_pos())/3;
+      y = this.y_pos() + (y-this.y_pos())/3;
+    }
 
     this.moveTo(y, x);
   // Follower.
